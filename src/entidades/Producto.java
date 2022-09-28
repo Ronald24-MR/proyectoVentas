@@ -49,10 +49,10 @@ public class Producto implements Serializable {
     private String nombres;
     @Basic(optional = false)
     @Column(name = "precio")
-    private int precio;
+    private String precio;
     @Basic(optional = false)
     @Column(name = "stock")
-    private int stock;
+    private String stock;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoCodigo")
     private List<Detalleventas> detalleventasList;
     @JoinColumn(name = "estado_codigo", referencedColumnName = "codigo")
@@ -66,7 +66,7 @@ public class Producto implements Serializable {
         this.codigo = codigo;
     }
 
-    public Producto(Integer codigo, String nombres, int precio, int stock) {
+    public Producto(Integer codigo, String nombres, String precio, String stock) {
         this.codigo = codigo;
         this.nombres = nombres;
         this.precio = precio;
@@ -89,19 +89,19 @@ public class Producto implements Serializable {
         this.nombres = nombres;
     }
 
-    public int getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
 
-    public int getStock() {
+    public String getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(String stock) {
         this.stock = stock;
     }
 

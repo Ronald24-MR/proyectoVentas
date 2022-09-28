@@ -41,10 +41,10 @@ public class Detalleventas implements Serializable {
     private Integer codigo;
     @Basic(optional = false)
     @Column(name = "cantidad")
-    private int cantidad;
+    private String cantidad;
     @Basic(optional = false)
     @Column(name = "precioVenta")
-    private int precioVenta;
+    private String precioVenta;
     @JoinColumn(name = "producto_codigo", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Producto productoCodigo;
@@ -59,7 +59,7 @@ public class Detalleventas implements Serializable {
         this.codigo = codigo;
     }
 
-    public Detalleventas(Integer codigo, int cantidad, int precioVenta) {
+    public Detalleventas(Integer codigo, String cantidad, String precioVenta) {
         this.codigo = codigo;
         this.cantidad = cantidad;
         this.precioVenta = precioVenta;
@@ -73,19 +73,19 @@ public class Detalleventas implements Serializable {
         this.codigo = codigo;
     }
 
-    public int getCantidad() {
+    public String getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 
-    public int getPrecioVenta() {
+    public String getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(int precioVenta) {
+    public void setPrecioVenta(String precioVenta) {
         this.precioVenta = precioVenta;
     }
 

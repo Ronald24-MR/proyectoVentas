@@ -6,8 +6,14 @@
 package vistas_edit;
 
 import controladores.ClienteJpaController;
+import controladores.EstadoJpaController;
+import controladores.exceptions.NonexistentEntityException;
 import entidades.Cliente;
+import entidades.Estado;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vistas.ClienteForm;
@@ -27,10 +33,27 @@ public class ClienteEdit extends javax.swing.JDialog {
     public ClienteEdit(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        EstadoJpaController es = new EstadoJpaController();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel(es.findEstadoEntities().toArray());
+        txtEstado.setModel(modelo);
         this.setLocationRelativeTo(null);
-      
+        cargarTabla();
     }
     
+    public void cargarTabla(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        String nombreColumnas[] = {"CEDULA","NOMBRES","DIRECCION","ESTADO"};
+        modelo.setColumnIdentifiers(nombreColumnas);
+        
+        List lista = c.findClienteEntities();
+        
+        for (int i = 0; i < lista.size(); i++) {
+            Cliente cl = (Cliente)lista.get(i);
+            Object fila[] = {cl.getCedula(),cl.getNombres(),cl.getDireccion(),cl.getEstadoCodigo()};
+            modelo.addRow(fila);
+        }
+        tabla.setModel(modelo);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -215,19 +238,24 @@ public class ClienteEdit extends javax.swing.JDialog {
         jPanel2.add(btnEntrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 110, 40));
 
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        jButton2.setText("Guardar");
+        jButton2.setText("Importar");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 100, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 110, -1));
 
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        jButton3.setText("Editar");
+        jButton3.setText("Actualizar");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 100, -1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 110, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -353,7 +381,23 @@ public class ClienteEdit extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-     
+        int fila = tabla.getSelectedRow();
+            if(fila == -1){
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una fila");
+            }
+            else{
+                if(fila >= 0){
+                    int codigo = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
+                    
+                    Cliente cliente = c.findCliente(codigo);
+                    
+                    txtCedula.setEditable(false);
+                    txtCedula.setText(cliente.getCedula().toString());
+                    txtNombres.setText(cliente.getNombres());
+                    txtDireccion.setText(cliente.getDireccion());
+                    txtEstado.setSelectedItem(cliente.getEstadoCodigo());
+                }
+            }
             
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -367,6 +411,37 @@ public class ClienteEdit extends javax.swing.JDialog {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int fila = tabla.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fila y luego importarla");
+        }
+        else{
+            int codigo = Integer.parseInt(txtCedula.getText());
+            String nombres = txtNombres.getText();
+            String direccion = txtDireccion.getText();
+            Estado estado = (Estado)txtEstado.getSelectedItem();
+       
+            cliente = c.findCliente(codigo);
+       
+            cliente.setCedula(codigo);
+            cliente.setNombres(nombres);
+            cliente.setDireccion(direccion);
+            cliente.setEstadoCodigo(estado);
+       
+            try {
+                c.edit(cliente);
+                JOptionPane.showMessageDialog(null,"Registro actualizado correctamente");
+                cargarTabla();
+            }catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"Error al actualizar el registro");
+
+            }
+        }
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vistas_edit.ClienteEdit;
 
 /**
  *
@@ -48,6 +50,20 @@ Cliente cliente = new Cliente();
         }
         tabla.setModel(modelo);
     }
+    
+    public void cargarTabla(int codigo){
+        DefaultTableModel modelo = new DefaultTableModel();
+        String nombreColumnas[] = {"CEDULA","NOMBRES","DIRECCION","ESTADO"};
+        modelo.setColumnIdentifiers(nombreColumnas);
+        
+        cliente = c.findCliente(codigo);
+        Object fila[] = {cliente.getCedula(),cliente.getNombres(),cliente.getDireccion(),cliente.getEstadoCodigo()};
+        modelo.addRow(fila);
+        
+        tabla.setModel(modelo);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,7 +94,7 @@ Cliente cliente = new Cliente();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -86,6 +102,8 @@ Cliente cliente = new Cliente();
 
         jButton5.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jButton5.setText("Eliminar");
+
+        setTitle("Modulo Cliente");
 
         jPanel1.setBackground(new java.awt.Color(128, 128, 128));
 
@@ -238,6 +256,11 @@ Cliente cliente = new Cliente();
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jButton1.setText("Buscar");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 100, -1));
 
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -253,6 +276,11 @@ Cliente cliente = new Cliente();
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jButton3.setText("Editar");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 100, -1));
 
         jButton4.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -265,9 +293,9 @@ Cliente cliente = new Cliente();
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 100, -1));
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, 160, 30));
+        txtBuscar.setBackground(new java.awt.Color(204, 204, 204));
+        txtBuscar.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jPanel2.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, 160, 30));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -464,6 +492,31 @@ Cliente cliente = new Cliente();
        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(txtBuscar.getText().equals("")){
+           JOptionPane.showMessageDialog(this, "Ingrese el codigo a buscar");
+        }
+        else{
+            int codigo = Integer.parseInt(txtBuscar.getText());
+            cliente = c.findCliente(codigo);
+       
+            if(cliente==null){
+                JOptionPane.showMessageDialog(this, "Codigo no registrado");
+            }
+            else{
+                cargarTabla(codigo);
+            }
+        }
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ClienteEdit e = new ClienteEdit(new JFrame(), true);
+        e.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnEntrar;
@@ -486,8 +539,8 @@ Cliente cliente = new Cliente();
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JComboBox<String> txtEstado;

@@ -52,7 +52,7 @@ public class Ventas implements Serializable {
     private String fechaVentas;
     @Basic(optional = false)
     @Column(name = "montos")
-    private int montos;
+    private String montos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ventasCodigo")
     private List<Detalleventas> detalleventasList;
     @JoinColumn(name = "cliente_cedula", referencedColumnName = "cedula")
@@ -72,7 +72,7 @@ public class Ventas implements Serializable {
         this.codigo = codigo;
     }
 
-    public Ventas(Integer codigo, String numeroVentas, String fechaVentas, int montos) {
+    public Ventas(Integer codigo, String numeroVentas, String fechaVentas, String montos) {
         this.codigo = codigo;
         this.numeroVentas = numeroVentas;
         this.fechaVentas = fechaVentas;
@@ -103,11 +103,11 @@ public class Ventas implements Serializable {
         this.fechaVentas = fechaVentas;
     }
 
-    public int getMontos() {
+    public String getMontos() {
         return montos;
     }
 
-    public void setMontos(int montos) {
+    public void setMontos(String montos) {
         this.montos = montos;
     }
 

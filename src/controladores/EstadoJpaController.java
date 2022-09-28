@@ -31,7 +31,7 @@ import javax.persistence.Persistence;
 public class EstadoJpaController implements Serializable {
 
     public EstadoJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("proyectaVentasPU");
+        this.emf =  Persistence.createEntityManagerFactory("proyectaVentasPU");
     }
     private EntityManagerFactory emf = null;
 

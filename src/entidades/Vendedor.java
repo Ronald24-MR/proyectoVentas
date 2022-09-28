@@ -46,7 +46,7 @@ public class Vendedor implements Serializable {
     private String nombres;
     @Basic(optional = false)
     @Column(name = "telefono")
-    private int telefono;
+    private String telefono;
     @Basic(optional = false)
     @Column(name = "clave")
     private String clave;
@@ -63,7 +63,7 @@ public class Vendedor implements Serializable {
         this.cedula = cedula;
     }
 
-    public Vendedor(Integer cedula, String nombres, int telefono, String clave) {
+    public Vendedor(Integer cedula, String nombres, String telefono, String clave) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.telefono = telefono;
@@ -86,11 +86,11 @@ public class Vendedor implements Serializable {
         this.nombres = nombres;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
