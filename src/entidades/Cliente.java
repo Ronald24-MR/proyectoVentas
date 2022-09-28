@@ -128,7 +128,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Cliente[ cedula=" + cedula + " ]";
+        return ""+cedula;
     }
     
 }

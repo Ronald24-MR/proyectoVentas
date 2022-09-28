@@ -141,7 +141,7 @@ public class Vendedor implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Vendedor[ cedula=" + cedula + " ]";
+        return this.nombres;
     }
     
 }

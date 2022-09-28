@@ -8,14 +8,21 @@ package vistas;
 import controladores.ClienteJpaController;
 import controladores.EstadoJpaController;
 import controladores.ProductoJpaController;
+import controladores.VendedorJpaController;
+import entidades.Cliente;
+import entidades.Producto;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ronald
  */
 public class VentasForm extends javax.swing.JInternalFrame {
-
+ ClienteJpaController c = new ClienteJpaController();
+ ProductoJpaController p = new ProductoJpaController();
+   EstadoJpaController es = new EstadoJpaController();
+     VendedorJpaController v = new VendedorJpaController();
     /**
      * Creates new form VentasForm
      */
@@ -32,8 +39,15 @@ public class VentasForm extends javax.swing.JInternalFrame {
         ClienteJpaController c = new ClienteJpaController();
         DefaultComboBoxModel modelo3 = new DefaultComboBoxModel(c.findClienteEntities().toArray());
         txtDniCliente.setModel(modelo3);
+        
+        VendedorJpaController v = new VendedorJpaController();
+        DefaultComboBoxModel modelo4 = new DefaultComboBoxModel(v.findVendedorEntities().toArray());
+        txtVendedor.setModel(modelo4);
     }
 
+    public void cargarTabla(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,9 +85,9 @@ public class VentasForm extends javax.swing.JInternalFrame {
         txtCliente = new javax.swing.JTextField();
         txtProducto = new javax.swing.JTextField();
         txtStock = new javax.swing.JTextField();
-        txtVende = new javax.swing.JTextField();
         txtDniCliente = new javax.swing.JComboBox<>();
         txtCodProducto = new javax.swing.JComboBox<>();
+        txtVendedor = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -90,33 +104,27 @@ public class VentasForm extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("PUNTO DE VENTA");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Venta de Productos Tecnologicos");
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tel: 12345 - 6789");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("NRO SERIE:");
 
         txtSerie.setBackground(new java.awt.Color(204, 204, 204));
         txtSerie.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtSerie.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/personal.png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("ESTADO:");
 
-        txtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -170,19 +178,15 @@ public class VentasForm extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("DNI CLIENTE:");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("COD PRODUCTO:");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("PRECIO:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("CANTIDAD:");
 
         txtPrecio.setBackground(new java.awt.Color(204, 204, 204));
@@ -223,24 +227,19 @@ public class VentasForm extends javax.swing.JInternalFrame {
         txtFecha.setForeground(new java.awt.Color(153, 0, 0));
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("CLIENTE:");
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("PRODUCTO:");
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("STOCK:");
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("VENDEDOR:");
 
         txtCliente.setBackground(new java.awt.Color(204, 204, 204));
         txtCliente.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        txtCliente.setForeground(new java.awt.Color(0, 0, 0));
 
         txtProducto.setBackground(new java.awt.Color(204, 204, 204));
         txtProducto.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -250,13 +249,11 @@ public class VentasForm extends javax.swing.JInternalFrame {
         txtStock.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         txtStock.setForeground(new java.awt.Color(51, 0, 255));
 
-        txtVende.setBackground(new java.awt.Color(204, 204, 204));
-        txtVende.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtVende.setForeground(new java.awt.Color(0, 0, 0));
+        txtDniCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
 
-        txtDniCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtCodProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
 
-        txtCodProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -291,8 +288,8 @@ public class VentasForm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtProducto)
                     .addComponent(txtCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtVende)
-                    .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -328,7 +325,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
                     .addComponent(txtCantidad)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtVende, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -340,7 +337,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "NRO", "CODIGO", "PRODUCTO", "CANTIDAD", "PRECIO UNI", "TOTAL"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
         ));
         tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -368,7 +365,6 @@ public class VentasForm extends javax.swing.JInternalFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("TOTAL A PAGAR:");
 
         txtTotal.setBackground(new java.awt.Color(204, 204, 204));
@@ -439,7 +435,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -459,100 +455,44 @@ public class VentasForm extends javax.swing.JInternalFrame {
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
 
-        int r;
-        String codigo = txtCodCliente.getText();
-        if(txtCodCliente.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Debe ingresar el codigo del cliente");
-        }
-        else{
-            Cliente cliente = c.listarId(codigo);
-            if(cliente.getDni() != null){
+       
+        int codigo = Integer.parseInt(txtDniCliente.getSelectedItem().toString());
+        
+       
+            Cliente cliente = c.findCliente(codigo);
+            if(cliente.getCedula() != null){
                 txtCliente.setText(cliente.getNombres());
-                txtCodProducto.requestFocus();
+               
             }
-            else{
-                r = JOptionPane.showConfirmDialog(this, "Cliente no registrado, Desea registrar un cliente?");
-                if(r==0){
-                    ClienteForm cf = new ClienteForm();
-                    frmPrincipal.principal.add(cf);
-                    cf.setVisible(true);
-                }
-            }
-        }
+            
+            
+        
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
         // TODO add your handling code here:
-        if(txtCodProducto.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Debe ingresar el codigo del producto");
-        }
-        else{
-            int id = Integer.parseInt(txtCodProducto.getText());
-            Producto producto = p.findProducto(id);
-            if(producto.getIdProducto() != 0){
-                txtProducto.setText(producto.getNombres());
-                txtProducto.setEditable(false);
-                txtPrecio.setText(""+producto.getPrecio());
-                txtPrecio.setEditable(false);
-                txtStock.setText(""+producto.getStock());
-                txtStock.setEditable(false);
+        int r;
+        int codigo = Integer.parseInt(txtCodProducto.getSelectedItem().toString());
+        
+       
+            Producto producto = p.findProducto(codigo);
+            if(producto.getCodigo() != null){
+                txtCliente.setText(producto.getNombres());
+               
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Producto no registrado");
-                txtCodProducto.requestFocus();
-            }
-        }
+            
+        
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        double total;
-        modelo = (DefaultTableModel)tabla.getModel();
-        item=item+1;
-        int idp = Integer.parseInt(txtCodProducto.getText());
-        String nomp = txtProducto.getText();
-        precio = Double.parseDouble(txtPrecio.getText());
-        cantidad = Integer.parseInt(txtCantidad.getValue().toString());
-        int stock = Integer.parseInt(txtStock.getText());
-        total =cantidad*precio;
-        ArrayList lista = new ArrayList();
-        if(stock>0){
-            lista.add(item);
-            lista.add(idp);
-            lista.add(nomp);
-            lista.add(cantidad);
-            lista.add(precio);
-            lista.add(total);
-            Object[]ob=new Object[6];
-            ob[0]=lista.get(0);
-            ob[1]=lista.get(1);
-            ob[2]=lista.get(2);
-            ob[3]=lista.get(3);
-            ob[4]=lista.get(4);
-            ob[5]=lista.get(5);
-            modelo.addRow(ob);
-            tabla.setModel(modelo);
-            calcularTotal();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Stock producto no disponible");
-        }
+       
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
-        if(txtTotal.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Debe ingresar datos");
-        }
-        else{
-            guardarVenta();
-            guardarDetalle();
-            actualizarStock();
-            JOptionPane.showMessageDialog(this, "Se realizo con exito");
-            nuevo();
-            generarSerie();
-        }
+        
     }//GEN-LAST:event_btnGenerarActionPerformed
 
 
@@ -595,6 +535,6 @@ public class VentasForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSerie;
     private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtVende;
+    private javax.swing.JComboBox<String> txtVendedor;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ronald/OneDrive/Documentos/NetBeansProjects/proyectaVentas/src/vistas/ClienteForm.java</file>
-            <file>file:/C:/Users/Ronald/OneDrive/Documentos/NetBeansProjects/proyectaVentas/src/vistas_edit/ProductoEdit.java</file>
-            <file>file:/C:/Users/Ronald/OneDrive/Documentos/NetBeansProjects/proyectaVentas/src/vistas_edit/ClienteEdit.java</file>
-            <file>file:/C:/Users/Ronald/OneDrive/Documentos/NetBeansProjects/proyectaVentas/src/vistas/ProductoForm.java</file>
-            <file>file:/C:/Users/Ronald/OneDrive/Documentos/NetBeansProjects/proyectaVentas/src/vistas/VentasForm.java</file>
+            <file>file:/C:/Users/APRENDIZ/Documents/NetBeansProjects/proyectoVentas/src/vistas/frmPrincipal.java</file>
+            <file>file:/C:/Users/APRENDIZ/Documents/NetBeansProjects/proyectoVentas/src/vistas/VentasForm.java</file>
+            <file>file:/C:/Users/APRENDIZ/Documents/NetBeansProjects/proyectoVentas/src/entidades/Vendedor.java</file>
+            <file>file:/C:/Users/APRENDIZ/Documents/NetBeansProjects/proyectoVentas/src/entidades/Producto.java</file>
+            <file>file:/C:/Users/APRENDIZ/Documents/NetBeansProjects/proyectoVentas/src/controladores/ClienteJpaController.java</file>
+            <file>file:/C:/Users/APRENDIZ/Documents/NetBeansProjects/proyectoVentas/src/entidades/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
